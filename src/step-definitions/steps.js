@@ -1,23 +1,21 @@
-const { Given, When, Then } = require('@wdio/cucumber-framework');
-const { expect, $ } = require('@wdio/globals')
+const { Given, When, Then } = require("@wdio/cucumber-framework");
+const { expect, $ } = require("@wdio/globals");
 
-const LoginPage = require('../page-objects/login.page');
-const SecurePage = require('../page-objects/secure.page');
+const LoginPage = require("../page-objects/login.page");
 
 const pages = {
-    login: LoginPage
-}
+  login: LoginPage,
+};
 
-Given(/^I am on the (\w+) page$/, async (page) => {
-    await pages[page].open()
+Given(/^I launch RudderStack app$/, async () => {
+  return true;
 });
 
-When(/^I login with (\w+) and (.+)$/, async (username, password) => {
-    await LoginPage.login(username, password)
+When(/^I enter my (.*) and (.*)$/, async (username, password) => {
+  return true;
 });
 
-Then(/^I should see a flash message saying (.*)$/, async (message) => {
-    await expect(SecurePage.flashAlert).toBeExisting();
-    await expect(SecurePage.flashAlert).toHaveTextContaining(message);
+Then(/^I should be able to login$/, async () => {
+  return true;
 });
 

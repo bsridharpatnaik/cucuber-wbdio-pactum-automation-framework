@@ -1,12 +1,10 @@
 In Progress
 ---------------------------------------
-Add step definitions for UI to log in to RudderStack App
-
+Add step definition for API to login to RudderStack App
 
 
 Yet to start
 ---------------------------------------
-Add step definition for API to login to RudderStack App
 Add env files for different environments to read url, creds etc.
 Add APIs URLs to seperate config file
 Add before/after scenario hook to launch and close browser
@@ -26,3 +24,4 @@ Completed
 Create git repo
 Create framework skelton
 Push wdio config to config folder
+Add step definitions for UI to log in to RudderStack App

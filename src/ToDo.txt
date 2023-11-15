@@ -8,6 +8,7 @@ Yet to start
 ---------------------------------------
 Add step definition for API to login to RudderStack App
 Add env files for different environments to read url, creds etc.
+Add APIs URLs to seperate config file
 Add before/after scenario hook to launch and close browser
 Add logger for generic logger
 Read test data from json files

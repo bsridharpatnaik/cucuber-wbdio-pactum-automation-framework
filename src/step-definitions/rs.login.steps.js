@@ -1,21 +1,21 @@
 const { Given, When, Then } = require("@wdio/cucumber-framework");
 const { expect, $ } = require("@wdio/globals");
 
-const LoginPage = require("../page-objects/login.page");
+const LoginPage = require("../page-objects/rs.login.page");
 
 const pages = {
   login: LoginPage,
 };
 
 Given(/^I launch RudderStack app$/, async () => {
-  return true;
+  await LoginPage.open();
 });
 
 When(/^I enter my (.*) and (.*)$/, async (username, password) => {
-  return true;
+  await LoginPage.login(username, password);
 });
 
 Then(/^I should be able to login$/, async () => {
+  await browser.debug();
   return true;
 });
-

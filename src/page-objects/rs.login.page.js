@@ -1,23 +1,22 @@
 const { $ } = require('@wdio/globals')
-const Page = require('./page');
-
+const { browser } = require('@wdio/globals')
 /**
  * sub page containing specific selectors and methods for a specific page
  */
-class LoginPage extends Page {
+class LoginPage {
     /**
      * define selectors using getter methods
      */
     get inputUsername () {
-        return $('#username');
+        return $('#text-input-email');
     }
 
     get inputPassword () {
-        return $('#password');
+        return $('#text-input-password');
     }
 
     get btnSubmit () {
-        return $('button[type="submit"]');
+        return $('button.ant-btn-primary');
     }
 
     /**
@@ -34,7 +33,7 @@ class LoginPage extends Page {
      * overwrite specific options to adapt it to page object
      */
     open () {
-        return super.open('login');
+        return browser.url("/");
     }
 }
 

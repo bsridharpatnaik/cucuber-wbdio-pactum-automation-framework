@@ -1,10 +1,11 @@
 In Progress
 ---------------------------------------
+Add step definitions for UI to log in to RudderStack App
+
 
 
 Yet to start
 ---------------------------------------
-Add step definitions for UI to log in to RudderStack App
 Add step definition for API to login to RudderStack App
 Add env files for different environments to read url, creds etc.
 Add before/after scenario hook to launch and close browser
@@ -17,6 +18,7 @@ Add priority to tests
 Add tags to tests
 Add multi browser support
 Integrate Jenkins
+
 
 Completed
 ---------------------------------------

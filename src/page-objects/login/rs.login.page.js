@@ -30,6 +30,14 @@ class LoginPage {
     }
 
     /**
+     * Funtion to receive emailand enter them on RudderStack UI login page..
+     * @param {*} email
+     */
+    async enterEmail(email) {
+        await this.getInputEmail.setValue(email);
+    }
+
+    /**
      * Funtion to check if mfa is displayed. If yes, click on do later link.
      */
     async mfaClickLater() {

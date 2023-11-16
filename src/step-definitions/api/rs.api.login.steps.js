@@ -1,3 +1,4 @@
+const { logger } = require("../../../config/logger.js");
 const environment = process.env.NODE_ENV
 require("dotenv").config({path: 'environments/.env.${environment}'});
 
@@ -26,3 +27,5 @@ Then(/^I should get success response with access key$/, async () => {
   //await browser.debug();
   return true;
 });
+
+

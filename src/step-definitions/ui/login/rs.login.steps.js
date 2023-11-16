@@ -1,7 +1,7 @@
 const { Given, When, Then } = require("@wdio/cucumber-framework");
 const { expect, $ } = require("@wdio/globals");
-const uiEndpoints = require("../../../../config/ui-endpoints.js");
 
+const uiEndpoints = require("../../../../config/ui-endpoints.js");
 const LoginPage = require("../../../page-objects/login/rs.login.page.js");
 const HomePage = require("../../../page-objects/homepage/rs.homepage.page.js");
 

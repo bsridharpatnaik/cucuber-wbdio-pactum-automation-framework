@@ -1,18 +1,17 @@
 In Progress
 ---------------------------------------
-Add reporter for better reporting
+Add exception handling for all step definitions
 
 
 Yet to start
 ---------------------------------------
 Add before/after scenario hook to launch and close browser
-Add logger for generic logger
 Read test data from json files
-Add exception handling for all step definitions
 Add retry logic
 Add priority to tests
 Add tags to tests
 Add multi browser support
+add environment config to reports
 Integrate Jenkins
 Parallel testing
 
@@ -26,3 +25,5 @@ Add step definitions for UI to log in to RudderStack App
 Add APIs URLs to seperate config file
 Add step definition for API to login to RudderStack App
 Add env files for different environments to read url, creds etc.
+Add reporter for better reporting
+Add logger for better logging

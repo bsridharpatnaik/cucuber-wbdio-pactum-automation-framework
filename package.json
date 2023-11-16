@@ -17,7 +17,8 @@
     "fs-extra": "^11.1.1",
     "multiple-cucumber-html-reporter": "^3.5.0",
     "pactum": "^3.5.1",
-    "wdio-cucumberjs-json-reporter": "^5.1.8"
+    "wdio-cucumberjs-json-reporter": "^5.1.8",
+    "winston": "^3.11.0"
   },
   "scripts": {
     "test": "cd config && NODE_ENV=test npx wdio wdio.conf.js",

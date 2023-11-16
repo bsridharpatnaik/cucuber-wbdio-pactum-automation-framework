@@ -4,6 +4,7 @@ const { generate } = require('multiple-cucumber-html-reporter');
 const { removeSync } = require('fs-extra');
 const { join } = require("path");
 const os = require("os");
+const { clearLogFile, logger } = require('./logger');
 
 function getSystemMetadata() {
   return {
@@ -153,19 +154,16 @@ exports.config = {
     ],
   ],
 
-  afterStep: function (uri, feature, scenario, step, result) {
-    if (result.status === "failed") {
-      browser.takeScreenshot();
-    }
-  },
-
   onPrepare: () => {
-    // Remove the `.tmp/` folder that holds the json and report files
+    logger.info("Execution started!");
+    // clean up report files and log files
     removeSync('../reports/json');
     removeSync('../reports/html');
+    clearLogFile(); 
   },
 
   onComplete: () => {
+    logger.info("Execution Completed!");
     // Generate the report when it all tests are done
     generate({
       // Required
@@ -175,6 +173,7 @@ exports.config = {
       reportPath: '../reports/html/',
       // for more options see https://github.com/wswebcreation/multiple-cucumber-html-reporter#options
     });
+    logger.info("Report files generated!");
   },
   // If you are using Cucumber you need to specify the location of your step definitions.
   cucumberOpts: {

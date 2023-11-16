@@ -1,5 +1,20 @@
 // Load environment variables from .env file
-require("dotenv").config({path: 'environments/.env.'+ process.env.NODE_ENV});
+require("dotenv").config({ path: "environments/.env." + process.env.NODE_ENV });
+const { generate } = require('multiple-cucumber-html-reporter');
+const { removeSync } = require('fs-extra');
+const { join } = require("path");
+const os = require("os");
+
+function getSystemMetadata() {
+  return {
+    "App Version": "1.0.0",
+    "Test Environment": process.env.NODE_ENV || "Unknown",
+    Browser: "chrome",
+    "Browser Version": "Unknown",
+    Platform: os.platform(),
+    Executed: "Locally",
+  };
+}
 
 exports.config = {
   //
@@ -127,8 +142,40 @@ exports.config = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  reporters: ["spec"],
+  reporters: [
+    "spec",
+    [
+      "cucumberjs-json",
+      {
+        jsonFolder: "../reports/json/",
+        language: "en",
+      },
+    ],
+  ],
 
+  afterStep: function (uri, feature, scenario, step, result) {
+    if (result.status === "failed") {
+      browser.takeScreenshot();
+    }
+  },
+
+  onPrepare: () => {
+    // Remove the `.tmp/` folder that holds the json and report files
+    removeSync('../reports/json');
+    removeSync('../reports/html');
+  },
+
+  onComplete: () => {
+    // Generate the report when it all tests are done
+    generate({
+      // Required
+      // This part needs to be the same path where you store the JSON files
+      // default = '.tmp/json/'
+      jsonDir: '../reports/json/',
+      reportPath: '../reports/html/',
+      // for more options see https://github.com/wswebcreation/multiple-cucumber-html-reporter#options
+    });
+  },
   // If you are using Cucumber you need to specify the location of your step definitions.
   cucumberOpts: {
     // <string[]> (file/dir) require files before executing features

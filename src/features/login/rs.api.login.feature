@@ -7,4 +7,4 @@ Feature: Verify login functionality for RudderStack API
 
     Examples: 
       | email      | password      |
-      | validEmail | validPassword |
+      | <validEmail> | <validPassword> |

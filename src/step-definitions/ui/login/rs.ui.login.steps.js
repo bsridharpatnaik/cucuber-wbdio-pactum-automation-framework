@@ -38,16 +38,15 @@ When(/^I enter my (.*) and (.*) and submit$/, async (email, password) => {
     }
 });
 
-/* When(/^I enter my (.*)$/, async (email) => {
-  try {
-      
-      await LoginPage.enterEmail(email);
-  } catch (error) {
-      logger.error("Error Logging in to application");
-      logger.error(`Error: ${error.message}`);
-      throw error; // Rethrow the exception to fail the step
-  }
-}); */
+When(/^I enter any (.*) as email$/, async (email) => {
+    try {
+        await LoginPage.enterEmail(email);
+    } catch (error) {
+        logger.error("Error Logging in to application");
+        logger.error(`Error: ${error.message}`);
+        throw error; // Rethrow the exception to fail the step
+    }
+});
 
 Then(/^I should see wrong email or password message$/, async () => {
     try {
@@ -81,10 +80,10 @@ Then(/^I should land on Dashboard$/, async () => {
 });
 
 Then(/^Login button should be disabled$/, async () => {
-  try {
-      expect(!LoginPage.getLoginButton.isEnabled());
-  } catch (error) {
-      logger.error(`Error: ${error.message}`);
-      throw error; // Rethrow the exception to fail the step
-  }
+    try {
+        expect(!LoginPage.getLoginButton.isEnabled());
+    } catch (error) {
+        logger.error(`Error: ${error.message}`);
+        throw error; // Rethrow the exception to fail the step
+    }
 });

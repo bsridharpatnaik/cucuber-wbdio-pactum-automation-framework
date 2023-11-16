@@ -11,6 +11,16 @@ Feature: Verify login functionality for RudderStack App
     Then Login button should be disabled
 
   @UI
+  Scenario Outline: Login Button should be disabled if random text is entered in email
+    Given I launch RudderStack login page
+    When I enter any <randomText> as email
+    Then Login button should be disabled
+
+    Examples: 
+      | randomText |
+      | abcdef     |
+
+  @UI
   Scenario Outline: User should be able to login with valid credentials
     Given I launch RudderStack login page
     When I enter my <email> and <password> and submit

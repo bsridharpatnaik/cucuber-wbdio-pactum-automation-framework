@@ -304,12 +304,12 @@ exports.config = {
      * @param {number}                 result.duration  duration of scenario in milliseconds
      * @param {object}                 context          Cucumber World object
      */
-    afterScenario: function (uri, feature, scenario, result, sourceLocation) {
+ /*    afterScenario: function (uri, feature, scenario, result, sourceLocation) {
         // Code to be executed after each scenario
 
         // Stop the browser session
         BrowserFactory.stopBrowser();
-    },
+    }, */
 
     /**
      *

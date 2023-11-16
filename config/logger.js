@@ -1,6 +1,6 @@
 const winston = require('winston');
 const fs = require('fs-extra')
-const logFilePath = 'logs/automation.log';
+const logFilePath = '../logs/automation.log';
 
 function clearLogFile() {
     try {

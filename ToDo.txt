@@ -1,7 +1,10 @@
 In Progress
 ---------------------------------------
+Add remaining feature files and step definitions
 Add exception handling for all step definitions
 CHange name for ui-endpoint
+apply lint to package json
+
 
 Yet to start
 ---------------------------------------

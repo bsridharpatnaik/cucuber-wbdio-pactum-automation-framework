@@ -1,5 +1,6 @@
 // Load environment variables from .env file
 require("dotenv").config({ path: "environments/.env." + process.env.NODE_ENV });
+const BrowserFactory = require("../src/utils/BrowserFactory.js");
 const { generate } = require("multiple-cucumber-html-reporter");
 const { removeSync } = require("fs-extra");
 const { join } = require("path");
@@ -267,7 +268,10 @@ exports.config = {
      * @param {ITestCaseHookParameter} world    world object containing information on pickle and test step
      * @param {object}                 context  Cucumber World object
      */
-
+    beforeScenario: async function (uri, feature, scenario) {
+        // Tear down browser
+        await BrowserFactory.tearDownBrowser();
+    },
     /**
      *
      * Runs before a Cucumber Step.
@@ -300,7 +304,12 @@ exports.config = {
      * @param {number}                 result.duration  duration of scenario in milliseconds
      * @param {object}                 context          Cucumber World object
      */
+    afterScenario: function (uri, feature, scenario, result, sourceLocation) {
+        // Code to be executed after each scenario
 
+        // Stop the browser session
+        BrowserFactory.stopBrowser();
+    },
 
     /**
      *

@@ -1,3 +1,6 @@
+require("dotenv").config({
+    path: "../../config/environments/.env." + process.env.NODE_ENV,
+});
 //Intention to create this method is to encapsulate browser interactions in a single class
 
 /**
@@ -5,7 +8,7 @@
  * @returns
  */
 const getCurrentUrl = () => {
-  return browser.getUrl();
+    return browser.getUrl();
 };
 
 /**
@@ -14,7 +17,7 @@ const getCurrentUrl = () => {
  * @returns
  */
 const openUrl = (path) => {
-  return browser.url(path);
+    return browser.url(path);
 };
 
 module.exports = { getCurrentUrl, openUrl };

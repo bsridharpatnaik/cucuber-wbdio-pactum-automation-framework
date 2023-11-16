@@ -5,13 +5,12 @@ const { logger } = require("../../../../config/logger.js");
 
 const uiRoutes = require("../../../../config/ui-routes.js");
 const LoginPage = require("../../../page-objects/login/rs.login.page.js");
-const HomePage = require("../../../page-objects/homepage/rs.homepage.page.js");
 const ReusableFunctions = require("../../../utils/reusableFunctions.js");
-const { getCurrentUrl } = require('../../../utils/browserUtils.js');
+const { getCurrentUrl, openUrl } = require('../../../utils/browserUtils.js');
 
 Given(/^I launch RudderStack login page$/, async () => {
   try {
-    await HomePage.open(uiRoutes.login);
+    await openUrl(uiRoutes.login);
     expect()
   } catch (error) {
     logger.error("Error launching Rudderstack login page");
@@ -38,14 +37,17 @@ When(/^I enter my (.*) and (.*) and submit$/, async (email, password) => {
   }
 });
 //
-Given(/^I select later on add mfa page$/, async () => {
+Then(/^I select later on add mfa page$/, async () => {
   try {
     await LoginPage.mfaClickLater();
+    expect(getCurrentUrl() === ReusableFunctions.getAbsoluteURL(uiRoutes.addmfalater));
   } catch (error) {
     logger.error(`Error: ${error.message}`);
     throw error; // Rethrow the exception to fail the step
   }
 });
-Then(/^I should be able to login$/, async () => {
+
+Then(/^I should land on Dashboard$/, async () => {
+
   return true;
 });

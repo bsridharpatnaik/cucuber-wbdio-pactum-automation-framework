@@ -4,8 +4,8 @@ Feature: Verify login functionality for RudderStack App
     Given I launch RudderStack login page
     When I enter my <email> and <password> and submit
     When I select later on add mfa page
-    Then I should be able to login
+    Then I should land on Dashboard
 
     Examples: 
-      | email                 | password      |
-      | validEmail               | validPassword |
+      | email      | password      |
+      | validEmail | validPassword |

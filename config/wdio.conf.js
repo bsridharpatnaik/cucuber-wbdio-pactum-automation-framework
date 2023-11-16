@@ -1,5 +1,6 @@
 // Load environment variables from .env file
-require("dotenv").config({path: 'environments/.env'});
+require("dotenv").config({path: 'environments/.env.'+ process.env.NODE_ENV});
+
 exports.config = {
   //
   // ====================

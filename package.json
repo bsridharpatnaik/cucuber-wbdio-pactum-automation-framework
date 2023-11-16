@@ -16,7 +16,8 @@
     "pactum": "^3.5.1"
   },
   "scripts": {
-    "test": "cd config && npx wdio wdio.conf.js",
+    "test": "cd config && NODE_ENV=test npx wdio wdio.conf.js",
+    "dev": "cd config && NODE_ENV=dev npx wdio wdio.conf.js",
     "wdio": "wdio run ./wdio.conf.js"
   },
   "keywords": [],

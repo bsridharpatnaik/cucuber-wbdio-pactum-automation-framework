@@ -1,4 +1,5 @@
-require("dotenv").config({ path: "environments/.env" });
+const environment = process.env.NODE_ENV
+require("dotenv").config({path: 'environments/.env.${environment}'});
 
 const { Given, When, Then } = require("@wdio/cucumber-framework");
 const { expect, $ } = require("@wdio/globals");
@@ -9,7 +10,7 @@ const apiEndpointsEndpoints = require("../../../config/api-endpoints.js");
 
 Given(
   /^I make Login API call using (.*) and (.*)$/,
-  async (username, password) => {
+  async (email, password) => {
     await pactum
       .spec()
       .post(baseUrl + apiEndpointsEndpoints.login)

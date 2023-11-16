@@ -8,7 +8,7 @@ class LoginPage {
     /**
      * define selectors using getter methods
      */
-    get inputUsername () {
+    get inputEmail () {
         return $('#text-input-email');
     }
 
@@ -21,12 +21,12 @@ class LoginPage {
     }
 
     /**
-     * Funtion to receive username, password as parameters and enter them on RudderStack UI login page. Then click login button.
-     * @param {*} username 
+     * Funtion to receive email, password as parameters and enter them on RudderStack UI login page. Then click login button.
+     * @param {*} email 
      * @param {*} password 
      */
-    async login (username, password) {
-        await this.inputUsername.setValue(username);
+    async login (email, password) {
+        await this.inputEmail.setValue(email);
         await this.inputPassword.setValue(password);
         await this.btnSubmit.click();
     }

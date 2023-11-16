@@ -1,5 +1,7 @@
-const uiEndpoints = {
-    login: "/login"
+const uiRoutes = {
+    login: "/login",
+    addmfa: "/addmfa",
+    addmfalater: "/addmfalater"
   };
   
-module.exports = uiEndpoints;
+module.exports = uiRoutes;

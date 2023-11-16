@@ -1,5 +1,6 @@
+require("dotenv").config({ path: "../../config/environments/.env." + process.env.NODE_ENV });
 const testData = require("./test-data.js");
-
+const path = require('path');
 class ReusableFunctions {
   /**
    * Funtion to receive email, password as parameters and replacing them with actual test data.
@@ -19,6 +20,15 @@ class ReusableFunctions {
             password: testData.loginData.inValidPassword
           };
     }
+  }
+
+  /**
+   * Received path and converts it into URL by appending to base URL
+   * @param {*} route 
+   * @returns 
+   */
+  async getAbsoluteURL(route) {
+        return path.join(process.env.BASE_URL,route);
   }
 }
 

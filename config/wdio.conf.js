@@ -271,15 +271,14 @@ exports.config = {
     beforeScenario: async function (uri, feature, scenario) {
         // Tear down browser
         await BrowserFactory.tearDownBrowser();
-        const isAPIScenario = scenario.pickle.tags.some(
+   /*      const isAPIScenario = scenario.pickle.tags.some(
             (tag) => tag.name === "@API"
         );
 
         if (isAPIScenario) {
             // Perform browser teardown (e.g., close browser)
-            browser.deleteSession();
-        }
-    },
+            browser.deleteSession(); */
+        },
     /**
      *
      * Runs before a Cucumber Step.

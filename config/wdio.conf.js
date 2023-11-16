@@ -268,7 +268,7 @@ exports.config = {
      * @param {ITestCaseHookParameter} world    world object containing information on pickle and test step
      * @param {object}                 context  Cucumber World object
      */
-    beforeScenario: async function (uri, feature, scenario) {
+    afterScenario: async function (uri, feature, scenario) {
         // Tear down browser
         await BrowserFactory.tearDownBrowser();
    /*      const isAPIScenario = scenario.pickle.tags.some(

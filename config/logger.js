@@ -20,6 +20,8 @@ const logger = winston.createLogger({
   ],
 });
 
+logger.info('Logger configured.');
+
 module.exports = {
   logger,
   clearLogFile,

@@ -22,7 +22,7 @@
     "winston": "^3.11.0"
   },
   "scripts": {
-    "test": "cd config && NODE_ENV=test npx wdio wdio.conf.js --cucumberOpts.tagExpression=",
+    "test": "cd config && NODE_ENV=test npx wdio wdio.conf.js --cucumberOpts.tagExpression",
     "dev": "cd config && NODE_ENV=dev npx wdio wdio.conf.js",
     "generate-report": "node scripts/generate-report.js",
     "wdio": "wdio run ./wdio.conf.js"

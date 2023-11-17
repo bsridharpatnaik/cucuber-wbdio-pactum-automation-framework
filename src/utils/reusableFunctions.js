@@ -7,7 +7,7 @@ class ReusableFunctions {
    * @param {*} email
    * @param {*} password
    */
-  async replaceLoginCredentials(email, password) {
+  replaceLoginCredentials(email, password) {
     if (email === "<validEmail>" && password === "<validPassword>") {
       return {
         email: testData.loginData.validEmail,

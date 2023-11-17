@@ -1,5 +1,6 @@
 const { $ } = require("@wdio/globals");
 const { browser } = require("@wdio/globals");
+const { getCurrentUrl } = require("../../utils/BrowserUtils");
 
 /**
  * sub page containing specific selectors and methods for a specific page
@@ -14,7 +15,7 @@ class LoginPage {
     inputPassword = "#text-input-password";
     loginButton = "button.ant-btn-primary";
     wrongCredMessage = "div.sc-iqcoie.gDuCAl";
-    
+
     // Add mfa page
     mfaDoLaterLink = "=I'll do this later";
     goToDashboardButton = "button.ant-btn-primary";
@@ -32,7 +33,7 @@ class LoginPage {
     }
 
     /**
-     * Funtion to receive emailand enter them on RudderStack UI login page..
+     * Funtion to receive email and enter it on RudderStack UI login page..
      * @param {*} email
      */
     async enterEmail(email) {
@@ -56,24 +57,11 @@ class LoginPage {
     }
 
     /**
-     * After clicking login, this method can be called to wait till browse redirection is complete
-     */
-    async waitTillRedirectionHappensAfterLogin() {
-        browser.waitUntil(
-            () => {
-                return (
-                    browser.getUrl() === "https://app.rudderstack.com/addmfa"
-                );
-            },
-            {
-                timeout: 15000, // Adjust the timeout as needed
-                timeoutMsg: "URL was not redirected within the specified time.",
-            }
-        );
-    }
-    /**
      * All getter methods for locators
      */
+    get getWrongCredMessage() {
+        return $(this.wrongCredMessage);
+    }
     get getInputEmail() {
         return $(this.inputEmail);
     }

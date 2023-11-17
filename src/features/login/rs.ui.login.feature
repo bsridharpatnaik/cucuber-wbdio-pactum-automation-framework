@@ -20,7 +20,7 @@ Feature: Verify login functionality for RudderStack App
       | randomText |
       | abcdef     |
 
-  @UI
+  @UI @Login
   Scenario Outline: User should be able to login with valid credentials
     Given I launch RudderStack login page
     When I enter my <email> and <password> and submit

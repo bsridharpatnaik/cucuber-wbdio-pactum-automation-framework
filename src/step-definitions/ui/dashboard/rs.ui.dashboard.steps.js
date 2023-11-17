@@ -9,6 +9,7 @@ const DashBoard = require("../../../page-objects/dashboard/rs.dashboard.page.js"
 const ReusableFunctions = require("../../../utils/reusableFunctions.js");
 const { getCurrentUrl, openUrl } = require("../../../utils/BrowserUtils.js");
 const { Background } = require("@cucumber/messages");
+const apiEndpoints = require("../../../../config/api-endpoints.js");
 
 Given(/^Left pane menu is displayed$/, async () => {
     expect(DashBoard.getLeftPaneMenu.isDisplayed());
@@ -30,11 +31,16 @@ Given(/^Connection does not exist$/, async () => {
 });
 
 When(/^I navigate to Sources page$/, async () => {
-    return true;
+    (await DashBoard.getLeftPaneSourcesLink).click();
+    console.log("Current URL  - " + await getCurrentUrl());
+    console.log("getAbsoluteURL URL  - " + uiRoutes.sources);
+    expect(await getCurrentUrl() === ReusableFunctions.getAbsoluteURL(uiRoutes.sources));
+    browser.pause(5000);
 });
 
 When(/^I click on source (.*)$/, async (sourceName) => {
-    return true;
+    (await DashBoard.getSourceByName(sourceName)).click();
+    browser.pause(20000);
 });
 
 When(/^I click on "Add Destination" button and select "use existing destination"$/, async () => {

@@ -2,7 +2,9 @@ const uiRoutes = {
     login: "/login",
     addmfa: "/addmfa",
     addmfalater: "/addmfalater",
-    dashboard: ""
+    dashboard: "",
+    sources: "/sources",
+    destinations: "/destinations"
   };
   
 module.exports = uiRoutes;

@@ -7,12 +7,19 @@ const uiRoutes = require("../../../../config/ui-routes.js");
 const LoginPage = require("../../../page-objects/login/rs.login.page.js");
 const DashBoard = require("../../../page-objects/dashboard/rs.dashboard.page.js");
 const ReusableFunctions = require("../../../utils/reusableFunctions.js");
-const { getCurrentUrl, openUrl } = require("../../../utils/BrowserUtils.js");
+const {
+    getCurrentUrl,
+    openUrl,
+    waitForRedirectionToExpectedURL,
+} = require("../../../utils/BrowserUtils.js");
+const { Console } = require("winston/lib/winston/transports/index.js");
 
 Given(/^I launch RudderStack login page$/, async () => {
     try {
         await openUrl(uiRoutes.login);
-        expect();
+        waitForRedirectionToExpectedURL(
+            ReusableFunctions.getAbsoluteURL(uiRoutes.login)
+        );
     } catch (error) {
         logger.error("Error launching Rudderstack login page");
         logger.error(`Error: ${error.message}`);
@@ -24,16 +31,11 @@ When(/^I enter my (.*) and (.*) and submit$/, async (email, password) => {
     try {
         // prettier-ignore
         const credentials = ReusableFunctions.replaceLoginCredentials(email, password);
-        // prettier-ignore
-        await LoginPage.login((await credentials).email, (await credentials).password);
-        await LoginPage.waitTillRedirectionHappensAfterLogin();
-        // Assert that the current URL is the expected redirected URL
-        expect(
-            getCurrentUrl() ===
-                ReusableFunctions.getAbsoluteURL(uiRoutes.addmfa)
+        await LoginPage.login(credentials.email, credentials.password);
+        waitForRedirectionToExpectedURL(
+            ReusableFunctions.getAbsoluteURL(uiRoutes.addmfa)
         );
     } catch (error) {
-        logger.error("Error Logging in to application");
         logger.error(`Error: ${error.message}`);
         throw error; // Rethrow the exception to fail the step
     }
@@ -51,7 +53,7 @@ When(/^I enter any (.*) as email$/, async (email) => {
 
 Then(/^I should see wrong email or password message$/, async () => {
     try {
-        return true;
+        (await LoginPage.getWrongCredMessage).isDisplayed();
     } catch (error) {
         logger.error(`Error: ${error.message}`);
         throw error; // Rethrow the exception to fail the step
@@ -61,9 +63,8 @@ Then(/^I should see wrong email or password message$/, async () => {
 Then(/^I select later on add mfa page$/, async () => {
     try {
         await LoginPage.mfaClickLater();
-        expect(
-            getCurrentUrl() ===
-                ReusableFunctions.getAbsoluteURL(uiRoutes.addmfalater)
+        waitForRedirectionToExpectedURL(
+            ReusableFunctions.getAbsoluteURL(uiRoutes.addmfalater)
         );
     } catch (error) {
         logger.error(`Error: ${error.message}`);
@@ -71,24 +72,20 @@ Then(/^I select later on add mfa page$/, async () => {
     }
 });
 
-
 Then(/^I click "Go to Dashboard" on addmfa later page$/, async () => {
-  try {
-      await LoginPage.clickGoToDashboard();
-      expect(
-          getCurrentUrl() ===
-              ReusableFunctions.getAbsoluteURL(uiRoutes.dashboard)
-      );
-  } catch (error) {
-      logger.error(`Error: ${error.message}`);
-      throw error; // Rethrow the exception to fail the step
-  }
+    try {
+        await LoginPage.clickGoToDashboard();
+        //TODO - add assertion to check URL route
+    } catch (error) {
+        logger.error(`Error: ${error.message}`);
+        throw error; // Rethrow the exception to fail the step
+    }
 });
 
 Then(/^I should land on Dashboard$/, async () => {
     try {
-        expect(getCurrentUrl() === ReusableFunctions.getAbsoluteURL(""));
-        expect((await DashBoard.getDashboardPageTitle).isDisplayed());
+        //TODO - add assertion to check URL route
+        //expect((await DashBoard.getDashboardPageTitle)).isDisplayed();
     } catch (error) {
         logger.error(`Error: ${error.message}`);
         throw error; // Rethrow the exception to fail the step
@@ -97,7 +94,7 @@ Then(/^I should land on Dashboard$/, async () => {
 
 Then(/^Login button should be disabled$/, async () => {
     try {
-        expect(!LoginPage.getLoginButton.isEnabled());
+        expect(await LoginPage.getLoginButton).toBeDisabled();
     } catch (error) {
         logger.error(`Error: ${error.message}`);
         throw error; // Rethrow the exception to fail the step

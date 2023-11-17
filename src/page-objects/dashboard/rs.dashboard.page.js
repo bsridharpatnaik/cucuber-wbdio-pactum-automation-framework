@@ -11,6 +11,9 @@ class Dashboard {
     leftPaneConnectionsLink = "//div[@class='ant-layout-sider-children']//a/span[text()='Connections']";
     leftPaneDestinationsLink = "//div[@class='ant-layout-sider-children']//a/span[text()='Destinations']";
 
+    //Source tab
+    sourceByName = "//div[@id='members-table']//div[@class='ant-table-body']//div[text()='${value}']";
+
     // Getter methods
     get getDashboardPageTitle() {
         return $(this.dashboardPageTitle);
@@ -26,6 +29,9 @@ class Dashboard {
     }
     get getLeftPaneDestinationsLink() {
         return $(this.leftPaneDestinationsLink);
+    }
+    get getSourceByName() {
+        return value => $(this.sourceByName);
     }
 }
 module.exports = new Dashboard();

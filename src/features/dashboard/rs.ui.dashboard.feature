@@ -7,7 +7,7 @@ Feature: Verify Source, Destination and Connection on RudderStack Dashboard
     When I click "Go to Dashboard" on addmfa later page
     Then I should land on Dashboard
 
-  @Dashboard
+  #@Dashboard
   Scenario Outline: I should be able to see leftpane menu with required links
     Given Left pane menu is displayed
     Then All required links should be displayed

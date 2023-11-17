@@ -7,17 +7,30 @@ class Dashboard {
      */
     dashboardPageTitle = "//h3[text()='Connections']";
     leftPaneMenu = "div.ant-layout-sider-children";
-    leftPaneSourcesLink = "//div[@class='ant-layout-sider-children']//a/span[text()='Sources']";
-    leftPaneConnectionsLink = "//div[@class='ant-layout-sider-children']//a/span[text()='Connections']";
-    leftPaneDestinationsLink = "//div[@class='ant-layout-sider-children']//a/span[text()='Destinations']";
+    leftPaneSourcesLink =
+        "//div[@class='ant-layout-sider-children']//a[@href='/sources']";
+    leftPaneConnectionsLink =
+        "//div[@class='ant-layout-sider-children']//a/span[text()='Connections']";
+    leftPaneDestinationsLink =
+        "//div[@class='ant-layout-sider-children']//a/span[text()='Destinations']";
+    pageTitle = "//h3[text()='${value}']";
+    overviewTab = "#rc-tabs-0-tab-Overview";
+    addDestinationButton = "div button.ant-dropdown-trigger";
+    useExistingDDestination = "//li[text()='Use Existing Destination']";
+    // Parameterized getters
+    get getSourceByName() {
+        return (sourceName) => $(`//div[@class='ant-table-body']//div[text()='${sourceName}']//ancestor::tr`);
+    }
 
-    //Source tab
-    sourceByName = "//div[@id='members-table']//div[@class='ant-table-body']//div[text()='${value}']";
+    get getPageTitle() {
+        return (value) => $(this.pageTitle);
+    }
 
     // Getter methods
     get getDashboardPageTitle() {
         return $(this.dashboardPageTitle);
     }
+
     get getLeftPaneMenu() {
         return $(this.leftPaneMenu);
     }
@@ -27,11 +40,18 @@ class Dashboard {
     get getLeftPaneConnectionsLink() {
         return $(this.leftPaneConnectionsLink);
     }
+    get getOverviewTab() {
+        return $(this.overviewTab);
+    }
+    get getAddDestinationButton() {
+        return $(this.addDestinationButton);
+    }
+    get getUseExistingDDestination() {
+        return $(this.useExistingDDestination);
+    }
     get getLeftPaneDestinationsLink() {
         return $(this.leftPaneDestinationsLink);
     }
-    get getSourceByName() {
-        return value => $(this.sourceByName);
-    }
+
 }
 module.exports = new Dashboard();

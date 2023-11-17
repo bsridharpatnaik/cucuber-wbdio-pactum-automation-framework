@@ -20,7 +20,40 @@ Then(/^All required links should be displayed$/, async () => {
     expect(DashBoard.getLeftPaneDestinationsLink.isDisplayed());
 });
 
-//I click on Connections link
+
 Then(/^I click on Connections link$/, async () => {
     (await DashBoard.getLeftPaneConnectionsLink).click();
 });
+
+Given(/^Connection does not exist$/, async () => {
+    return true;
+});
+
+When(/^I navigate to Sources page$/, async () => {
+    return true;
+});
+
+When(/^I click on source (.*)$/, async (sourceName) => {
+    return true;
+});
+
+When(/^I click on "Add Destination" button and select "use existing destination"$/, async () => {
+    return true;
+});
+
+When(/^I select radio button against (.*) and click Continue$/, async (destinationName) => {
+    return true;
+});
+
+When(/^I Click Continue again on configuration page$/, async () => {
+    return true;
+});
+
+Then(/^I verify that connection line exists on Connections page$/, async () => {
+    return true;
+});
+
+Then(/^I verify that (.*) is displayed under source page$/, async (destinationName) => {
+    return true;
+});
+

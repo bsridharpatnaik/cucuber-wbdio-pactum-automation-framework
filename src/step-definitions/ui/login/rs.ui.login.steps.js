@@ -12,7 +12,6 @@ const {
     openUrl,
     waitForRedirectionToExpectedURL,
 } = require("../../../utils/BrowserUtils.js");
-const { Console } = require("winston/lib/winston/transports/index.js");
 
 Given(/^I launch RudderStack login page$/, async () => {
     try {

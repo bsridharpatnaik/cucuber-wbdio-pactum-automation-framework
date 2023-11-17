@@ -32,9 +32,7 @@ Given(/^Connection does not exist$/, async () => {
 
 When(/^I navigate to Sources page$/, async () => {
     (await DashBoard.getLeftPaneSourcesLink).click();
-    console.log("Current URL  - " + await getCurrentUrl());
-    console.log("getAbsoluteURL URL  - " + uiRoutes.sources);
-    expect(await getCurrentUrl() === ReusableFunctions.getAbsoluteURL(uiRoutes.sources));
+//
     browser.pause(5000);
 });
 

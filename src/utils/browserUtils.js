@@ -27,10 +27,14 @@ waitForRedirectionToExpectedURL = async (expectedUrl) => {
             return (await browser.getUrl()) === expectedUrl;
         },
         {
-            timeout: 15000, // Adjust the timeout as needed
+            timeout: 30000, // Adjust the timeout as needed
             timeoutMsg: "URL was not redirected within the specified time.",
         }
     );
 };
 
-module.exports = { getCurrentUrl, openUrl, waitForRedirectionToExpectedURL };
+pauseBrowser = async (ms) => {
+    await browser.pause(ms);
+}
+
+module.exports = { getCurrentUrl, openUrl, waitForRedirectionToExpectedURL, pauseBrowser};

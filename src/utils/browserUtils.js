@@ -1,11 +1,15 @@
+require("dotenv").config({
+    path: "../../config/environments/.env." + process.env.NODE_ENV,
+});
 //Intention to create this method is to encapsulate browser interactions in a single class
 
 /**
  * Get current broswer URL
  * @returns
  */
-const getCurrentUrl = () => {
-  return browser.getUrl();
+getCurrentUrl = async () => {
+    const currentUrl = await browser.getUrl();
+    return currentUrl;
 };
 
 /**
@@ -14,7 +18,23 @@ const getCurrentUrl = () => {
  * @returns
  */
 const openUrl = (path) => {
-  return browser.url(path);
+    return browser.url(path);
 };
 
-module.exports = { getCurrentUrl, openUrl };
+waitForRedirectionToExpectedURL = async (expectedUrl) => {
+    await browser.waitUntil(
+        async () => {
+            return (await browser.getUrl()) === expectedUrl;
+        },
+        {
+            timeout: 30000, // Adjust the timeout as needed
+            timeoutMsg: "URL was not redirected within the specified time.",
+        }
+    );
+};
+
+pauseBrowser = async (ms) => {
+    await browser.pause(ms);
+}
+
+module.exports = { getCurrentUrl, openUrl, waitForRedirectionToExpectedURL, pauseBrowser};

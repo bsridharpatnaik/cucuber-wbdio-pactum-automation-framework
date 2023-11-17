@@ -1,7 +1,8 @@
 In Progress
 ---------------------------------------
-Add exception handling for all step definitions
-CHange name for ui-endpoint
+Add remaining feature files and step definitions
+apply lint to package json
+
 
 Yet to start
 ---------------------------------------
@@ -27,3 +28,5 @@ Add step definition for API to login to RudderStack App
 Add env files for different environments to read url, creds etc.
 Add reporter for better reporting
 Add logger for better logging
+Add exception handling for all step definitions
+CHange name for ui-endpoint

@@ -26,6 +26,7 @@ class Dashboard {
     refreshButton = "//*[@class='ant-btn-loading-icon']//parent::button";
     disconnectDestOption =
         "//span[@class='ant-dropdown-menu-title-content']/parent::li";
+    connectionLine = "#leader-line-container svg";
     /**
      * Parameterized getters
      */
@@ -81,9 +82,11 @@ class Dashboard {
     get getRefreshButton() {
         return $(this.refreshButton);
     }
-
     get getDisconnectDestOption() {
         return $(this.disconnectDestOption);
+    }
+    get getConnectionLine() {
+        return $(this.connectionLine);
     }
     /**
      * methods for interacting with elements
@@ -92,6 +95,8 @@ class Dashboard {
     async checkConnectionLineOnConnPage() {
         await this.clickConnectionLink();
         await this.getPageTitle("Connections");
+        await pauseBrowser(2000); //intentional for page to load
+        await this.getConnectionLine.isDisplayed();
     }
     async clickContinueOnConfig() {
         await this.getContinueButton.isDisplayed();
@@ -125,6 +130,13 @@ class Dashboard {
         await this.getContinueButton.isDisplayed();
         await this.getContinueButton.click();
         await this.getPageTitle("HTTP Dev").isDisplayed();
+    }
+
+    async checkIfDestAvailableUnderSource(sourceName, destinationName) {
+        await this.getLeftPaneSourcesLink.click();
+        await this.getPageTitle("Sources").isDisplayed();
+        await this.getSourceByName(sourceName).click();
+        await this.get3DotsButtonForDestination(destinationName).isDisplayed();
     }
 }
 module.exports = new Dashboard();

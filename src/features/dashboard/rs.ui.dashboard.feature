@@ -21,8 +21,9 @@ Feature: Verify Source, Destination and Connection on RudderStack Dashboard
     When I select radio button against <destinationName> and click Continue
     When I Click Continue again on configuration page
     Then I verify that connection line exists on Connections page
-    Then I verify that <destinationName> is displayed under source page
+    Then I verify that <destinationName> is displayed under source <sourceName>
 
     Examples: 
       | sourceName | destinationName   |
       | HTTP Dev   | SampleWebhookDest |
+

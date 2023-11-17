@@ -1,8 +1,5 @@
 const { $ } = require("@wdio/globals");
-const {
-    pauseBrowser,
-    waitForRedirectionToExpectedURL,
-} = require("../../utils/BrowserUtils");
+const { pauseBrowser, waitForRedirectionToExpectedURL } = require("../../utils/BrowserUtils");
 const reusableFunctions = require("../../utils/reusableFunctions");
 
 class Dashboard {
@@ -11,22 +8,18 @@ class Dashboard {
      */
     dashboardPageTitle = "//h3[text()='Connections']";
     leftPaneMenu = "div.ant-layout-sider-children";
-    leftPaneSourcesLink =
-        "//div[@class='ant-layout-sider-children']//a[@href='/sources']";
-    leftPaneConnectionsLink =
-        "//div[@class='ant-layout-sider-children']//a/span[text()='Connections']";
-    leftPaneDestinationsLink =
-        "//div[@class='ant-layout-sider-children']//a/span[text()='Destinations']";
+    leftPaneSourcesLink = "//div[@class='ant-layout-sider-children']//a[@href='/sources']";
+    leftPaneConnectionsLink = "//div[@class='ant-layout-sider-children']//a/span[text()='Connections']";
+    leftPaneDestinationsLink = "//div[@class='ant-layout-sider-children']//a/span[text()='Destinations']";
     pageTitle = "//h3[text()='${value}']";
     overviewTab = "#rc-tabs-0-tab-Overview";
     addDestinationButton = "div button.ant-dropdown-trigger";
-    useExistingDDestination =
-        "//li/span[text()='Use Existing Destination']/parent::li";
+    useExistingDDestination = "//li/span[text()='Use Existing Destination']/parent::li";
     continueButton = "//button/span[text()='Continue']/parent::button";
     refreshButton = "//*[@class='ant-btn-loading-icon']//parent::button";
-    disconnectDestOption =
-        "//span[@class='ant-dropdown-menu-title-content']/parent::li";
+    disconnectDestOption = "//span[@class='ant-dropdown-menu-title-content']/parent::li";
     connectionLine = "#leader-line-container svg";
+    confirmDisconnectButton = "//button/span[text()='Confirm']/parent::button";
     /**
      * Parameterized getters
      */
@@ -44,9 +37,7 @@ class Dashboard {
     }
 
     get3DotsButtonForDestination(value) {
-        return $(
-            `//tr//div[text()='${value}']/ancestor::td/following-sibling::td[2]/button`
-        );
+        return $(`//tr//div[text()='${value}']/ancestor::td/following-sibling::td[2]/button`);
     }
     /**
      * getter methods
@@ -88,6 +79,9 @@ class Dashboard {
     get getConnectionLine() {
         return $(this.connectionLine);
     }
+    get getConfirmDisconnectButton() {
+        return $(this.confirmDisconnectButton);
+    }
     /**
      * methods for interacting with elements
      */
@@ -113,7 +107,7 @@ class Dashboard {
         await this.getPageTitle("Connect existing destination").isDisplayed();
     }
     async clickOnSource(sourceName) {
-        await this.getSourceByName(sourceName).isDisplayed();
+        await this.getSourceByName(sourceName).waitForDisplayed()
         await this.getSourceByName(sourceName).click();
         await this.getPageTitle(sourceName).isDisplayed();
     }
@@ -137,6 +131,16 @@ class Dashboard {
         await this.getPageTitle("Sources").isDisplayed();
         await this.getSourceByName(sourceName).click();
         await this.get3DotsButtonForDestination(destinationName).isDisplayed();
+    }
+
+    async disconnectDestination(destinationName) {
+        await this.get3DotsButtonForDestination(destinationName).click();
+        await this.getDisconnectDestOption.click();
+        await this.getConfirmDisconnectButton.click();
+        // prettier-ignore
+        await this.getConfirmDisconnectButton.waitForDisplayed({ reverse: true }); //wait for button to disappear
+        // prettier-ignore
+        await this.get3DotsButtonForDestination(destinationName).waitForDisplayed({reverse: true});
     }
 }
 module.exports = new Dashboard();

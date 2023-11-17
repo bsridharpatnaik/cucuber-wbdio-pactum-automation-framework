@@ -24,11 +24,11 @@ const openUrl = (path) => {
 waitForRedirectionToExpectedURL = async (expectedUrl) => {
     await browser.waitUntil(
         async () => {
-            return (await browser.getUrl()) === expectedUrl;
+            return (await browser.getUrl()) === await expectedUrl;
         },
         {
             timeout: 30000, // Adjust the timeout as needed
-            timeoutMsg: "URL was not redirected within the specified time.",
+            timeoutMsg: "URL " + await expectedUrl + " was not redirected within the specified time.",
         }
     );
 };

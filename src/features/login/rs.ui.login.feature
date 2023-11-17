@@ -1,16 +1,16 @@
 Feature: Verify login functionality for RudderStack App
 
-  @UI
+  @UI @Login
   Scenario Outline: Login Button should be disabled on page load
     Given I launch RudderStack login page
     Then Login button should be disabled
 
-  @UI
+  @UI @Login
   Scenario Outline: Login Button should be disabled on page load
     Given I launch RudderStack login page
     Then Login button should be disabled
 
-  @UI
+  @UI @Login
   Scenario Outline: Login Button should be disabled if random text is entered in email
     Given I launch RudderStack login page
     When I enter any <randomText> as email
@@ -32,7 +32,7 @@ Feature: Verify login functionality for RudderStack App
       | email        | password        |
       | <validEmail> | <validPassword> |
 
-  @UI
+  @UI @Login
   Scenario Outline: User should NOT be able to login with invalid credentials
     Given I launch RudderStack login page
     When I enter my <email> and <password> and submit

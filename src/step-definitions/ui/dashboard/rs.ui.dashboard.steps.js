@@ -7,11 +7,7 @@ const uiRoutes = require("../../../../config/ui-routes.js");
 const LoginPage = require("../../../page-objects/login/rs.login.page.js");
 const DashBoardPage = require("../../../page-objects/dashboard/rs.dashboard.page.js");
 const ReusableFunctions = require("../../../utils/reusableFunctions.js");
-const {
-    getCurrentUrl,
-    openUrl,
-    pauseBrowser,
-} = require("../../../utils/BrowserUtils.js");
+const { getCurrentUrl, openUrl, pauseBrowser } = require("../../../utils/BrowserUtils.js");
 const { Background } = require("@cucumber/messages");
 const apiEndpoints = require("../../../../config/api-endpoints.js");
 const { pause } = require("webdriverio");
@@ -26,12 +22,29 @@ Then(/^All required links should be displayed$/, async () => {
     expect(DashBoardPage.getLeftPaneDestinationsLink).isDisplayed();
 });
 
+Then(/^I click on three dots against (.*) and click disconnect$/, async (destinationName) => {
+    await DashBoardPage.disconnectDestination(destinationName);
+    await pauseBrowser(4000);
+});
+
 Then(/^I click on Connections link$/, async () => {
     await DashBoardPage.clickConnectionLink();
 });
 
+Then(/^I verify that (.*) is not displayed under source (.*)$/, async (destinationName, sourceName) => {
+    //TODO -
+});
+
+Then(/^I verify that connection line does exists on Connections page$/, async () => {
+    //TODO
+});
+
 Given(/^Connection does not exist$/, async () => {
-    return true;
+    return true; //TODO - code to delete connection if exists
+});
+
+Given(/^Connection exists$/, async () => {
+    return true; //TODO - code to create connection if does not exists
 });
 
 When(/^I navigate to Sources page$/, async () => {
@@ -42,19 +55,13 @@ When(/^I click on source (.*)$/, async (sourceName) => {
     await DashBoardPage.clickOnSource(sourceName);
 });
 
-When(
-    /^I click on "Add Destination" button and select "use existing destination"$/,
-    async () => {
-        await DashBoardPage.selectUseExistingDistFromAddDestination();
-    }
-);
+When(/^I click on "Add Destination" button and select "use existing destination"$/, async () => {
+    await DashBoardPage.selectUseExistingDistFromAddDestination();
+});
 
-When(
-    /^I select radio button against (.*) and click Continue$/,
-    async (destinationName) => {
-        await DashBoardPage.selectRadioAgainstDestAndContinue(destinationName);
-    }
-);
+When(/^I select radio button against (.*) and click Continue$/, async (destinationName) => {
+    await DashBoardPage.selectRadioAgainstDestAndContinue(destinationName);
+});
 
 When(/^I Click Continue again on configuration page$/, async () => {
     await DashBoardPage.clickContinueOnConfig();
@@ -64,9 +71,6 @@ Then(/^I verify that connection line exists on Connections page$/, async () => {
     await DashBoardPage.checkConnectionLineOnConnPage();
 });
 
-Then(
-    /^I verify that (.*) is displayed under source (.*)$/,
-    async (destinationName, sourceName) => {
-        await DashBoardPage.checkIfDestAvailableUnderSource(sourceName, destinationName);
-    }
-);
+Then(/^I verify that (.*) is displayed under source (.*)$/, async (destinationName, sourceName) => {
+    await DashBoardPage.checkIfDestAvailableUnderSource(sourceName, destinationName);
+});

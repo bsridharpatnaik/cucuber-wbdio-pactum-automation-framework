@@ -1,7 +1,8 @@
 const uiRoutes = {
     login: "/login",
     addmfa: "/addmfa",
-    addmfalater: "/addmfalater"
+    addmfalater: "/addmfalater",
+    dashboard: ""
   };
   
 module.exports = uiRoutes;

@@ -5,8 +5,9 @@ const { logger } = require("../../../../config/logger.js");
 
 const uiRoutes = require("../../../../config/ui-routes.js");
 const LoginPage = require("../../../page-objects/login/rs.login.page.js");
+const DashBoard = require("../../../page-objects/dashboard/rs.dashboard.page.js");
 const ReusableFunctions = require("../../../utils/reusableFunctions.js");
-const { getCurrentUrl, openUrl } = require("../../../utils/browserUtils.js");
+const { getCurrentUrl, openUrl } = require("../../../utils/BrowserUtils.js");
 
 Given(/^I launch RudderStack login page$/, async () => {
     try {
@@ -70,9 +71,24 @@ Then(/^I select later on add mfa page$/, async () => {
     }
 });
 
+
+Then(/^I click "Go to Dashboard" on addmfa later page$/, async () => {
+  try {
+      await LoginPage.clickGoToDashboard();
+      expect(
+          getCurrentUrl() ===
+              ReusableFunctions.getAbsoluteURL(uiRoutes.dashboard)
+      );
+  } catch (error) {
+      logger.error(`Error: ${error.message}`);
+      throw error; // Rethrow the exception to fail the step
+  }
+});
+
 Then(/^I should land on Dashboard$/, async () => {
     try {
         expect(getCurrentUrl() === ReusableFunctions.getAbsoluteURL(""));
+        expect((await DashBoard.getDashboardPageTitle).isDisplayed());
     } catch (error) {
         logger.error(`Error: ${error.message}`);
         throw error; // Rethrow the exception to fail the step

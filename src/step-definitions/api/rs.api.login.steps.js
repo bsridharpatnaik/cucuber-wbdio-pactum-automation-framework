@@ -1,7 +1,6 @@
-const { logger } = require("../../../config/logger.js");
-const environment = process.env.NODE_ENV
-require("dotenv").config({path: 'environments/.env.${environment}'});
+require("dotenv").config({path: "environments/.env." + process.env.NODE_ENV });
 
+const { logger } = require("../../../config/logger.js");
 const { Given, When, Then } = require("@wdio/cucumber-framework");
 const { expect, $ } = require("@wdio/globals");
 const pactum = require("pactum");

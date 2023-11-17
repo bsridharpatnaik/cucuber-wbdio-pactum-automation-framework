@@ -14,8 +14,10 @@ class LoginPage {
     inputPassword = "#text-input-password";
     loginButton = "button.ant-btn-primary";
     wrongCredMessage = "div.sc-iqcoie.gDuCAl";
+    
     // Add mfa page
     mfaDoLaterLink = "=I'll do this later";
+    goToDashboardButton = "button.ant-btn-primary";
 
     /**
      * Funtion to receive email, password as parameters and enter them on RudderStack UI login page. Then click login button.
@@ -43,6 +45,14 @@ class LoginPage {
     async mfaClickLater() {
         this.getMfaDoLaterLink.waitForDisplayed(10000);
         await this.getMfaDoLaterLink.click();
+    }
+
+    /**
+     * Funtion to click "Got To dashboard" on after selecting later on mfa page
+     */
+    async clickGoToDashboard() {
+        this.getGoToDashboardButton.waitForDisplayed(10000);
+        await this.getGoToDashboardButton.click();
     }
 
     /**
@@ -78,6 +88,10 @@ class LoginPage {
 
     get getMfaDoLaterLink() {
         return $(this.mfaDoLaterLink);
+    }
+
+    get getGoToDashboardButton() {
+        return $(this.goToDashboardButton);
     }
 }
 

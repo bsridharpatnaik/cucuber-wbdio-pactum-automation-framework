@@ -77,5 +77,5 @@ npm run lint
 
 # npm run wdio
 Trigger WebdriverIO Configuration
-```bash
+```
 

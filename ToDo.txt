@@ -1,7 +1,7 @@
 In Progress
 ---------------------------------------
 Add remaining feature files and step definitions
-apply lint to package json
+
 
 
 Yet to start
@@ -30,3 +30,4 @@ Add retry logic
 Add priority to tests - not required. Can be handled throught tags
 Add tags to tests
 Add before/after scenario hook to launch and close browser
+apply lint to package json

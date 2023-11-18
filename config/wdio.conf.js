@@ -1,7 +1,7 @@
 // Load environment variables from .env file
 
 require("dotenv").config({ path: "environments/.env." + process.env.NODE_ENV });
-const RerunService = require ('wdio-rerun-service');
+const RerunService = require("wdio-rerun-service");
 const BrowserFactory = require("../src/utils/BrowserFactory.js");
 const { generate } = require("multiple-cucumber-html-reporter");
 const { removeSync } = require("fs-extra");
@@ -64,7 +64,7 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 1,
+    //maxInstances: 1,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -72,7 +72,8 @@ exports.config = {
     //
     capabilities: [
         {
-            browserName: "chrome",
+            maxInstances: 1,
+            browserName: process.env.BROWSER || 'chrome',
         },
     ],
 
@@ -123,14 +124,12 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: [[RerunService, {
-        
-    }]],
+    services: [[RerunService, {}]],
     rerunService: {
-        command: 'npx wdio',
+        command: "npx wdio",
         rerunMaxInstances: 2,
         instances: 2,
-      },
+    },
     //
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
@@ -167,10 +166,7 @@ exports.config = {
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
         // <string[]> (file/dir) require files before executing features
-        require: [
-            "../src/step-definitions/**/*.js",
-            "../src/step-definitions/**/**/*.js",
-        ],
+        require: ["../src/step-definitions/**/*.js", "../src/step-definitions/**/**/*.js"],
         // <boolean> show full backtrace for errors
         backtrace: false,
         // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)

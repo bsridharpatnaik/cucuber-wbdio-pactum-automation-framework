@@ -26,7 +26,9 @@
   },
   "scripts": {
     "test": "cd config && NODE_ENV=test npx wdio wdio.conf.js --cucumberOpts.tagExpression",
-    "dev": "cd config && NODE_ENV=dev npx wdio wdio.conf.js",
+    "dev": "cd config && NODE_ENV=dev npx wdio wdio.conf.js --cucumberOpts.tagExpression",
+    "test:chrome": "cd config && NODE_ENV=test && BROWSER=chrome npx wdio wdio.conf.js --cucumberOpts.tagExpression",
+    "test:firefox": "cd config && NODE_ENV=test && BROWSER=firefox npx wdio wdio.conf.js --cucumberOpts.tagExpression",
     "generate-report": "node scripts/generate-report.js",
     "wdio": "wdio run ./wdio.conf.js",
     "lint": "eslint config/"

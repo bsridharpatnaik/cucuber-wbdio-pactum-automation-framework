@@ -21,11 +21,7 @@ Hybrid automation testing framework built using NodeJS, PactumJS, CucumberJS, We
 
 List the key features of your automation framework:
 
-- Pactum JS for API testing
-- Cucumber JS for BDD
-- WebDriverIO for end-to-end UI testing
-- Other features...Winston
-
+- 
 ## Prerequisites
 
 Specify any prerequisites or dependencies that users need to have installed before using your framework.
@@ -56,5 +52,30 @@ npm install
 
 Note - There might be some dependencies which WebDriverIO installs as part of configuration. You can run wdio config and install the same.
 
-# Run tests
-npm test
+# Execution Commands
+
+# Run all API and Web tests on dev environment using default browser
+npm run dev '' 
+
+# Run all API and Web tests on test environment using default browser
+npm run test '' 
+
+#Run all tests on Chrome browser
+npm run "test:chrome" ''
+
+#Run all tests on Firefox browser
+npm run "test:firefox" ''
+
+#Run Tag specific tests on Chrome browser
+npm run "test:chrome" '@AnyTag'
+
+#Run Tag specific tests on Firefox browser
+npm run "test:firefox" '@AnyTag'
+
+# Trigger linting
+npm run lint
+
+# npm run wdio
+Trigger WebdriverIO Configuration
+```bash
+

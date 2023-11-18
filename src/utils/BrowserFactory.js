@@ -3,15 +3,16 @@ require("dotenv").config({
 });
 
 class BrowserFactory {
-    static startBrowser() {
-        // Perform browser setup (e.g., open browser, navigate to URL)
-        //browser.url(process.env.BASE_URL);
-    }
-
+    
     static async tearDownBrowser() {
-        await browser.execute("window.localStorage.clear()");
-        await browser.execute("window.sessionStorage.clear()");
-        await browser.deleteAllCookies();
+        try{
+            await browser.execute("window.localStorage.clear()");
+            await browser.execute("window.sessionStorage.clear()");
+            await browser.deleteAllCookies();
+        } catch (e){
+            // Intentional. Exception will be thrown for API Tests. This is to supress them.
+        }
+        
     }
 }
 

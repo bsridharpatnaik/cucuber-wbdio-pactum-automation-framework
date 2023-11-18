@@ -1,5 +1,5 @@
 require("dotenv").config({ path: "../../config/environments/.env." + process.env.NODE_ENV });
-const testData = require("./test-data.js");
+const testData = require("../test-data/test-data");
 const path = require('path');
 class ReusableFunctions {
   /**
@@ -27,9 +27,6 @@ class ReusableFunctions {
    * @param {*} route 
    * @returns 
    */
-  async getAbsoluteURL(route) {
-        return path.join(process.env.BASE_URL,route);
-  }
 }
 
 module.exports = new ReusableFunctions();

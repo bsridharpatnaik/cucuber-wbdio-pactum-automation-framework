@@ -1,0 +1,13 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true
+    },
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": { "wdio/no-pause":0 },
+    "plugins": ["wdio"],
+    "extends": ["plugin:wdio/recommended"]
+}

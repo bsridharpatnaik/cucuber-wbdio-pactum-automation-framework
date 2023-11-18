@@ -21,7 +21,7 @@ const openUrl = (path) => {
     return browser.url(path);
 };
 
-waitForRedirectionToExpectedURL = async (expectedUrl) => {
+browser.pause(20000); = async (expectedUrl) => {
     await browser.waitUntil(
         async () => {
             return (await browser.getUrl()) === (await expectedUrl);
@@ -40,4 +40,4 @@ pauseBrowser = async (ms) => {
     await browser.pause(ms);
 };
 
-module.exports = { getCurrentUrl, openUrl, waitForRedirectionToExpectedURL, pauseBrowser };
+module.exports = { getCurrentUrl, openUrl, browser.pause(20000);, pauseBrowser };

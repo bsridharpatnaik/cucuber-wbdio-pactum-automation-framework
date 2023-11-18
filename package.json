@@ -14,6 +14,8 @@
     "@wdio/spec-reporter": "^8.23.0",
     "cucumber-html-reporter": "^6.0.0",
     "dotenv": "^16.3.1",
+    "eslint": "^8.54.0",
+    "eslint-plugin-wdio": "^8.20.0",
     "fs-extra": "^11.1.1",
     "multiple-cucumber-html-reporter": "^3.5.0",
     "pactum": "^3.5.1",
@@ -26,7 +28,8 @@
     "test": "cd config && NODE_ENV=test npx wdio wdio.conf.js --cucumberOpts.tag",
     "dev": "cd config && NODE_ENV=dev npx wdio wdio.conf.js",
     "generate-report": "node scripts/generate-report.js",
-    "wdio": "wdio run ./wdio.conf.js"
+    "wdio": "wdio run ./wdio.conf.js",
+    "lint": "eslint config/"
   },
   "keywords": [],
   "author": "Sridhar Patnaik",

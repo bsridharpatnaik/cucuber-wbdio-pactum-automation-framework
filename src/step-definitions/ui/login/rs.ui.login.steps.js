@@ -7,18 +7,12 @@ const uiRoutes = require("../../../../config/ui-routes.js");
 const LoginPage = require("../../../page-objects/login/rs.login.page.js");
 const DashBoard = require("../../../page-objects/dashboard/rs.dashboard.page.js");
 const ReusableFunctions = require("../../../utils/reusableFunctions.js");
-const {
-    getCurrentUrl,
-    openUrl,
-    waitForRedirectionToExpectedURL,
-} = require("../../../utils/BrowserUtils.js");
+const { getCurrentUrl, openUrl, waitForRedirectionToExpectedURL } = require("../../../utils/BrowserUtils.js");
 
 Given(/^I launch RudderStack login page$/, async () => {
     try {
         await openUrl(uiRoutes.login);
-        waitForRedirectionToExpectedURL(
-            ReusableFunctions.getAbsoluteURL(uiRoutes.login)
-        );
+        waitForRedirectionToExpectedURL(ReusableFunctions.getAbsoluteURL(uiRoutes.login));
     } catch (error) {
         logger.error("Error launching Rudderstack login page");
         logger.error(`Error: ${error.message}`);
@@ -31,9 +25,7 @@ When(/^I enter my (.*) and (.*) and submit$/, async (email, password) => {
         // prettier-ignore
         const credentials = ReusableFunctions.replaceLoginCredentials(email, password);
         await LoginPage.login(credentials.email, credentials.password);
-        waitForRedirectionToExpectedURL(
-            ReusableFunctions.getAbsoluteURL(uiRoutes.addmfa)
-        );
+        await waitForRedirectionToExpectedURL(ReusableFunctions.getAbsoluteURL(uiRoutes.addmfa));
     } catch (error) {
         logger.error(`Error: ${error.message}`);
         throw error; // Rethrow the exception to fail the step
@@ -93,7 +85,7 @@ Then(/^I should land on Dashboard$/, async () => {
 
 Then(/^Login button should be disabled$/, async () => {
     try {
-        expect(await LoginPage.getLoginButton).toBeDisabled();
+        await expect(await LoginPage.getLoginButton).toBeDisabled();
     } catch (error) {
         logger.error(`Error: ${error.message}`);
         throw error; // Rethrow the exception to fail the step

@@ -4,8 +4,6 @@ Hybrid automation testing framework built using NodeJS, PactumJS, CucumberJS, We
 
 ## Overview
 
-## Overview
-
 **cucuber-wbdio-pactum-automation-framework** is an end-to-end testing framework designed to ensure the reliability and functionality of any Web and API E2E testing. It leverages industry-leading technologies and tools to streamline the testing process and provide a robust testing solution. Key components include:
 
 - **Pactum JS for API Testing:** Pactum JS is employed for comprehensive API testing, allowing seamless validation of RESTful services and endpoints.
@@ -20,8 +18,44 @@ Hybrid automation testing framework built using NodeJS, PactumJS, CucumberJS, We
 ## Features
 
 List the key features of your automation framework:
+- Can be plug and played to any project
+- Multiple environments can be configured like dev, test, prod etc.
+- All API endpoints, UI routes are configured in single file for easy maintainance.
+- All required testdata managed within same file for easy maintainance
+- Cucumber multiple HTML reporter for user friendly reporting
+- Retry logic to trigger flaky tests
+- Test suite can be created by tagging tests and passing tag while execution
+- Multiple browser support thorugh CLI
+ 
 
-- 
+# Project Structure
+   
+└── src
+|   ├── features                            - Feature files
+|   |
+|   ├── page-objects                        - Page Objects
+|   |
+|   ├── step-definitions
+|   |                                       - Step Definitions
+|   ├── test-data                           
+|   │   ├── data-template.js                - Test data template for jsons
+|   │   └── test-data.js                    - Test data for other scenarios
+|   └── utils
+|       ├── BrowserFactory.js               - All browser cleanup encapsulated into one class
+|       ├── BrowserUtils.js                 - All browser actions encapsulated into one class
+|       └── ReusableFunctions.js            - Utility functions    
+├── README.md
+├── ToDo.txt
+├── config                                  - All configuration files
+│   ├── api-endpoints.js                    - Configure all API endpoints
+│   ├── environments                        - All environment files
+│   ├── logger.js                           - Logger Configuration
+│   ├── ui-routes.js                        - All UI Routes
+│   └── wdio.conf.js                        - Webdriver config
+├── logs                                    - Logs Directory
+├── package.json                            
+├── reports                                 - Generated reports after execution
+│ 
 ## Prerequisites
 
 Specify any prerequisites or dependencies that users need to have installed before using your framework.

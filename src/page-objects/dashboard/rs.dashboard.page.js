@@ -123,6 +123,8 @@ class Dashboard {
     }
 
     async readAndLogEventStats() {
+        await pauseBrowser(2000);// intentional. Can be replaced using wait untill
+        await this.getStatsOnEvents[0].waitForDisplayed();
         logger.info("Delivered Events - " + (await this.getStatsOnEvents[0].getText()));
         logger.info("Failed Events - " + (await this.getStatsOnEvents[1].getText()));
     }

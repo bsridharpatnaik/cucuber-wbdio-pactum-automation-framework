@@ -27,9 +27,6 @@ class ReusableFunctions {
    * @param {*} route 
    * @returns 
    */
-  async getAbsoluteURL(route) {
-        return path.join(process.env.BASE_URL,route);
-  }
 }
 
 module.exports = new ReusableFunctions();

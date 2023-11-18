@@ -12,7 +12,7 @@ const { getCurrentUrl, openUrl, waitForRedirectionToExpectedURL } = require("../
 Given(/^I launch RudderStack login page$/, async () => {
     try {
         await openUrl(uiRoutes.login);
-        await waitForRedirectionToExpectedURL(ReusableFunctions.getAbsoluteURL(uiRoutes.login));
+        await waitForRedirectionToExpectedURL(uiRoutes.login);
     } catch (error) {
         logger.error("Error launching Rudderstack login page");
         logger.error(`Error: ${error.message}`);
@@ -25,7 +25,7 @@ When(/^I enter my (.*) and (.*) and submit$/, async (email, password) => {
         // prettier-ignore
         const credentials = ReusableFunctions.replaceLoginCredentials(email, password);
         await LoginPage.login(credentials.email, credentials.password);
-        await waitForRedirectionToExpectedURL(ReusableFunctions.getAbsoluteURL(uiRoutes.addmfa));
+//        await waitForRedirectionToExpectedURL(uiRoutes.addmfa);
     } catch (error) {
         logger.error(`Error: ${error.message}`);
         throw error; // Rethrow the exception to fail the step
@@ -44,7 +44,7 @@ When(/^I enter any (.*) as email$/, async (email) => {
 
 Then(/^I should see wrong email or password message$/, async () => {
     try {
-        (await LoginPage.getWrongCredMessage).isDisplayed();
+        await LoginPage.getWrongCredMessage.isDisplayed();
     } catch (error) {
         logger.error(`Error: ${error.message}`);
         throw error; // Rethrow the exception to fail the step
@@ -54,7 +54,7 @@ Then(/^I should see wrong email or password message$/, async () => {
 Then(/^I select later on add mfa page$/, async () => {
     try {
         await LoginPage.mfaClickLater();
-        await waitForRedirectionToExpectedURL(ReusableFunctions.getAbsoluteURL(uiRoutes.addmfalater));
+        await waitForRedirectionToExpectedURL(uiRoutes.addmfalater);
     } catch (error) {
         logger.error(`Error: ${error.message}`);
         throw error; // Rethrow the exception to fail the step

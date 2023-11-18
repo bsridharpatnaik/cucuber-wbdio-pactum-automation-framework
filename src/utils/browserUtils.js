@@ -8,7 +8,7 @@ require("dotenv").config({
  * @returns
  */
 getCurrentUrl = async () => {
-    const currentUrl = await browser.getUrl();
+    const currentUrl = (await browser.getUrl()).replace(process.env.BASE_URL,'');
     return currentUrl;
 };
 
@@ -24,7 +24,7 @@ const openUrl = (path) => {
 waitForRedirectionToExpectedURL = async (expectedUrl) => {
     await browser.waitUntil(
         async () => {
-            return (await browser.getUrl()) === (await expectedUrl);
+            return (await browser.getUrl()).replace(process.env.BASE_URL,'') === (await expectedUrl);
         },
         {
             timeout: 30000, // Adjust the timeout as needed

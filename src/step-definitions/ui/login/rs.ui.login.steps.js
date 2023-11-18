@@ -6,7 +6,7 @@ const { logger } = require("../../../../config/logger.js");
 const uiRoutes = require("../../../../config/ui-routes.js");
 const LoginPage = require("../../../page-objects/login/rs.login.page.js");
 const DashBoard = require("../../../page-objects/dashboard/rs.dashboard.page.js");
-const ReusableFunctions = require("../../../utils/reusableFunctions.js");
+const ReusableFunctions = require("../../../utils/ReusableFunctions.js");
 const { getCurrentUrl, openUrl, waitForRedirectionToExpectedURL } = require("../../../utils/BrowserUtils.js");
 
 Given(/^I launch RudderStack login page$/, async () => {

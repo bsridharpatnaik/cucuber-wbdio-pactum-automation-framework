@@ -1,5 +1,5 @@
 require("dotenv").config({ path: "../../config/environments/.env." + process.env.NODE_ENV });
-const testData = require("./test-data.js");
+const testData = require("../test-data/test-data");
 const path = require('path');
 class ReusableFunctions {
   /**

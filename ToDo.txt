@@ -7,7 +7,6 @@ Add remaining feature files and step definitions
 Yet to start
 ---------------------------------------
 Read test data from json files
-Add multi browser support
 add environment config to reports
 Integrate Jenkins
 Parallel testing
@@ -31,3 +30,4 @@ Add priority to tests - not required. Can be handled throught tags
 Add tags to tests
 Add before/after scenario hook to launch and close browser
 apply lint to package json
+Add multi browser support

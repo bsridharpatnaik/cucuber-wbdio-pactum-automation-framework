@@ -1,6 +1,6 @@
 const { $ } = require("@wdio/globals");
 const { pauseBrowser, waitForRedirectionToExpectedURL } = require("../../utils/BrowserUtils");
-const reusableFunctions = require("../../utils/reusableFunctions");
+const reusableFunctions = require("../../utils/ReusableFunctions");
 
 class Dashboard {
     /**

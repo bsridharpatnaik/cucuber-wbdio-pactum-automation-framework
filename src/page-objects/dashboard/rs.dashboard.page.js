@@ -1,6 +1,7 @@
 const { $ } = require("@wdio/globals");
 const { pauseBrowser, waitForRedirectionToExpectedURL } = require("../../utils/BrowserUtils");
 const reusableFunctions = require("../../utils/ReusableFunctions");
+const { logger } = require("../../../config/logger");
 
 class Dashboard {
     /**
@@ -12,7 +13,7 @@ class Dashboard {
     leftPaneConnectionsLink = "//div[@class='ant-layout-sider-children']//a/span[text()='Connections']";
     leftPaneDestinationsLink = "//div[@class='ant-layout-sider-children']//a/span[text()='Destinations']";
     pageTitle = "//h3[text()='${value}']";
-    overviewTab = "#rc-tabs-0-tab-Overview";
+    statsOnEvents = "//div[contains(@class,'events_container')]/div/span";
     addDestinationButton = "div button.ant-dropdown-trigger";
     useExistingDDestination = "//li/span[text()='Use Existing Destination']/parent::li";
     continueButton = "//button/span[text()='Continue']/parent::button";
@@ -23,9 +24,11 @@ class Dashboard {
     /**
      * Parameterized getters
      */
-    get getSourceByName() {
-        // prettier-ignore
-        return (sourceName) => $(`//div[@class='ant-table-body']//div[text()='${sourceName}']//ancestor::tr`);
+    get getTabOnSourceOrDestination(){
+        return (name) => $(`//div[@class='ant-tabs-nav-list']//div[text()='${name}']`);
+    }
+    get getSourceOrDestinationByName() {
+        return (name) => $(`//div[@class='ant-table-body']//div[text()='${name}']//ancestor::tr`);
     }
 
     getRadioButtonForDestination(value) {
@@ -42,10 +45,12 @@ class Dashboard {
     /**
      * getter methods
      */
+    get getStatsOnEvents() {
+        return $$(this.statsOnEvents);
+    }
     get getDashboardPageTitle() {
         return $(this.dashboardPageTitle);
     }
-
     get getLeftPaneMenu() {
         return $(this.leftPaneMenu);
     }
@@ -54,9 +59,6 @@ class Dashboard {
     }
     get getLeftPaneConnectionsLink() {
         return $(this.leftPaneConnectionsLink);
-    }
-    get getOverviewTab() {
-        return $(this.overviewTab);
     }
     get getContinueButton() {
         return $(this.continueButton);
@@ -106,7 +108,7 @@ class Dashboard {
         await this.getContinueButton.waitForDisplayed({ reverse: true }); //wait for button to disappear
     }
     async selectUseExistingDistFromAddDestination() {
-        await this.getOverviewTab.click();
+        await this.getTabOnSourceOrDestination("Overview").click();
         await this.getRefreshButton.isDisplayed(); // this is intentional as position of Add Destination button changes after refresh is displayed
         await pauseBrowser(2000); // Intention wait to allow movement of button //TODO - search for ways to remove this hard wait
         await this.getAddDestinationButton.moveTo();
@@ -114,10 +116,19 @@ class Dashboard {
         await this.getUseExistingDDestination.click();
         await this.getPageTitle("Connect existing destination").isDisplayed();
     }
-    async clickOnSource(sourceName) {
-        await this.getSourceByName(sourceName).waitForDisplayed()
-        await this.getSourceByName(sourceName).click();
-        await this.getPageTitle(sourceName).isDisplayed();
+    async clickOnSourceOrDestination(name) {
+        await this.getSourceOrDestinationByName(name).waitForDisplayed();
+        await this.getSourceOrDestinationByName(name).click();
+        await this.getPageTitle(name).isDisplayed();
+    }
+
+    async readAndLogEventStats() {
+        logger.info("Delivered Events - " + (await this.getStatsOnEvents[0].getText()));
+        logger.info("Failed Events - " + (await this.getStatsOnEvents[1].getText()));
+    }
+
+    async gotToEventsTabOnDestination() {
+        await this.getTabOnSourceOrDestination("Events").click();
     }
     async clickConnectionLink() {
         await this.getLeftPaneConnectionsLink.click();
@@ -125,6 +136,11 @@ class Dashboard {
     async navigateToSourcePage() {
         await this.getLeftPaneSourcesLink.click();
         await this.getPageTitle("Sources").isDisplayed();
+    }
+
+    async navigateToDestinationsPage() {
+        await this.getLeftPaneDestinationsLink.click();
+        await this.getPageTitle("Destinations").isDisplayed();
     }
 
     async selectRadioAgainstDestAndContinue(destinationName) {
@@ -137,18 +153,16 @@ class Dashboard {
     async checkIfDestAvailableUnderSource(sourceName, destinationName) {
         await this.getLeftPaneSourcesLink.click();
         await this.getPageTitle("Sources").isDisplayed();
-        await this.getSourceByName(sourceName).click();
+        await this.getSourceOrDestinationByName(sourceName).click();
         await this.get3DotsButtonForDestination(destinationName).isDisplayed();
     }
 
     async disconnectDestination(destinationName) {
-        await pauseBrowser(3000); //Intentional to allow loading of refresh button. 
+        await pauseBrowser(3000); //Intentional to allow loading of refresh button.
         await this.get3DotsButtonForDestination(destinationName).click();
         await this.getDisconnectDestOption.click();
         await this.getConfirmDisconnectButton.click();
-        // prettier-ignore
         await this.getConfirmDisconnectButton.waitForDisplayed({ reverse: true }); //wait for button to disappear
-        // prettier-ignore
         await this.get3DotsButtonForDestination(destinationName).waitForDisplayed({reverse: true});
     }
 }

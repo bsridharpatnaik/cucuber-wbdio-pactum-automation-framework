@@ -34,3 +34,15 @@ Feature: Verify Source, Destination and Connection on RudderStack Dashboard
     Examples: 
       | sourceName | destinationName   |
       | HTTP Dev   | SampleWebhookDest |
+
+  @Dashboard
+  Scenario Outline: Open Destination and read Event stats
+    Given I navigate to Destination page
+    And I click on Destination <destinationName>
+    And I go to Events tab
+    Then I read and log Event stats
+    
+
+    Examples: 
+      | destinationName |
+      | Test WH   |

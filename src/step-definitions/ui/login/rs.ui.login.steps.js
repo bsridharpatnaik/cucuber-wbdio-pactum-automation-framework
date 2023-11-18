@@ -11,25 +11,21 @@ const { getCurrentUrl, openUrl, waitForRedirectionToExpectedURL } = require("../
 
 Given(/^I launch RudderStack login page$/, async () => {
     try {
-        await LoginPage.openLoginAndWaitToLoad(I);
         await openUrl(uiRoutes.login);
-        await waitForRedirectionToExpectedURL(uiRoutes.login);
     } catch (error) {
         logger.error("Error launching Rudderstack login page");
         logger.error(`Error: ${error.message}`);
-        throw error; 
+        throw error;
     }
 });
 
 When(/^I enter my (.*) and (.*) and submit$/, async (email, password) => {
     try {
-        // prettier-ignore
         const credentials = ReusableFunctions.replaceLoginCredentials(email, password);
         await LoginPage.login(credentials.email, credentials.password);
-//        await waitForRedirectionToExpectedURL(uiRoutes.addmfa);
     } catch (error) {
         logger.error(`Error: ${error.message}`);
-        throw error; 
+        throw error;
     }
 });
 
@@ -39,7 +35,7 @@ When(/^I enter any (.*) as email$/, async (email) => {
     } catch (error) {
         logger.error("Error Logging in to application");
         logger.error(`Error: ${error.message}`);
-        throw error; 
+        throw error;
     }
 });
 
@@ -48,27 +44,25 @@ Then(/^I should see wrong email or password message$/, async () => {
         await LoginPage.getWrongCredMessage.isDisplayed();
     } catch (error) {
         logger.error(`Error: ${error.message}`);
-        throw error; 
+        throw error;
     }
 });
 
 Then(/^I select later on add mfa page$/, async () => {
     try {
         await LoginPage.mfaClickLater();
-        await waitForRedirectionToExpectedURL(uiRoutes.addmfalater);
     } catch (error) {
         logger.error(`Error: ${error.message}`);
-        throw error; 
+        throw error;
     }
 });
 
 Then(/^I click "Go to Dashboard" on addmfa later page$/, async () => {
     try {
         await LoginPage.clickGoToDashboard();
-        waitForRedirectionToExpectedURL(uiRoutes.dashboard);
     } catch (error) {
         logger.error(`Error: ${error.message}`);
-        throw error; 
+        throw error;
     }
 });
 
@@ -77,7 +71,7 @@ Then(/^I should land on Dashboard$/, async () => {
         await DashBoard.getDashboardPageTitle.isDisplayed();
     } catch (error) {
         logger.error(`Error: ${error.message}`);
-        throw error; 
+        throw error;
     }
 });
 
@@ -86,6 +80,6 @@ Then(/^Login button should be disabled$/, async () => {
         await expect(await LoginPage.getLoginButton).toBeDisabled();
     } catch (error) {
         logger.error(`Error: ${error.message}`);
-        throw error; 
+        throw error;
     }
 });

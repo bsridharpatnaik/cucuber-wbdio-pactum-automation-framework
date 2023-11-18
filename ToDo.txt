@@ -1,13 +1,12 @@
 In Progress
 ---------------------------------------
-Add remaining feature files and step definitions
+Integrate Jenkins/Github
 
 Yet to start
 ---------------------------------------
-add environment config to reports
 Integrate Jenkins
-Parallel testing
 
+add environment config to reports
 
 Completed
 ---------------------------------------
@@ -29,3 +28,5 @@ Add before/after scenario hook to launch and close browser
 apply lint to package json
 Add multi browser support
 Read test data from data template
+Add remaining feature files and step definitions
+Parallel testing - Handled already by webdriverio

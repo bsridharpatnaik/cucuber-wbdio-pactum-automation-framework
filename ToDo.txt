@@ -6,11 +6,7 @@ apply lint to package json
 
 Yet to start
 ---------------------------------------
-Add before/after scenario hook to launch and close browser
 Read test data from json files
-Add retry logic
-Add priority to tests
-Add tags to tests
 Add multi browser support
 add environment config to reports
 Integrate Jenkins
@@ -30,3 +26,7 @@ Add reporter for better reporting
 Add logger for better logging
 Add exception handling for all step definitions
 CHange name for ui-endpoint
+Add retry logic
+Add priority to tests - not required. Can be handled throught tags
+Add tags to tests
+Add before/after scenario hook to launch and close browser

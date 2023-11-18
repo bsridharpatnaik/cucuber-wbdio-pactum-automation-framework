@@ -54,9 +54,7 @@ Then(/^I should see wrong email or password message$/, async () => {
 Then(/^I select later on add mfa page$/, async () => {
     try {
         await LoginPage.mfaClickLater();
-        waitForRedirectionToExpectedURL(
-            ReusableFunctions.getAbsoluteURL(uiRoutes.addmfalater)
-        );
+        waitForRedirectionToExpectedURL(ReusableFunctions.getAbsoluteURL(uiRoutes.addmfalater));
     } catch (error) {
         logger.error(`Error: ${error.message}`);
         throw error; // Rethrow the exception to fail the step

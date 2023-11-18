@@ -29,7 +29,7 @@ List the key features of your automation framework:
  
 
 # Project Structure
-   
+```
 └── src
 |   ├── features                            - Feature files
 |   |
@@ -56,6 +56,7 @@ List the key features of your automation framework:
 ├── package.json                            
 ├── reports                                 - Generated reports after execution
 │ 
+```
 ## Prerequisites
 
 Specify any prerequisites or dependencies that users need to have installed before using your framework.

@@ -1,5 +1,6 @@
 const apiEndpoints = {
-  login: "/login"
+  login: "/login",
+  identify: "/v1/identify"
 };
 
 module.exports = apiEndpoints;

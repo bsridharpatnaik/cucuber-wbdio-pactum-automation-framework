@@ -12,7 +12,7 @@ const { getCurrentUrl, openUrl, waitForRedirectionToExpectedURL } = require("../
 Given(/^I launch RudderStack login page$/, async () => {
     try {
         await openUrl(uiRoutes.login);
-        waitForRedirectionToExpectedURL(ReusableFunctions.getAbsoluteURL(uiRoutes.login));
+        await waitForRedirectionToExpectedURL(ReusableFunctions.getAbsoluteURL(uiRoutes.login));
     } catch (error) {
         logger.error("Error launching Rudderstack login page");
         logger.error(`Error: ${error.message}`);
@@ -54,7 +54,7 @@ Then(/^I should see wrong email or password message$/, async () => {
 Then(/^I select later on add mfa page$/, async () => {
     try {
         await LoginPage.mfaClickLater();
-        waitForRedirectionToExpectedURL(ReusableFunctions.getAbsoluteURL(uiRoutes.addmfalater));
+        await waitForRedirectionToExpectedURL(ReusableFunctions.getAbsoluteURL(uiRoutes.addmfalater));
     } catch (error) {
         logger.error(`Error: ${error.message}`);
         throw error; // Rethrow the exception to fail the step

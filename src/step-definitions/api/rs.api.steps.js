@@ -45,7 +45,26 @@ Then(/^I should be able to make call to IdentifyURL$/, async () => {
                 "Content-Type": "application/json",
                 Authorization: authHeader,
             })
-            .withJson(dataTemplate.identifyData)
+            .withJson(dataTemplate.identifyAPIData)
+            .expectStatus(200)
+            .toss();
+    } catch (error) {
+        logger.error(`I should be able to make call to IdentifyURL': ${error.message}`);
+        throw error; // Rethrow the error to mark the step as failed
+    }
+});
+
+Then(/^I should be able to make call to TrackURL$/, async () => {
+    try {
+        const authHeader = `Basic ${Buffer.from(process.env.writeKey + ":").toString("base64")}`;
+        pactum
+            .spec()
+            .post(dpUrl + apiEndpoints.track)
+            .withHeaders({
+                "Content-Type": "application/json",
+                Authorization: authHeader,
+            })
+            .withJson(dataTemplate.trackAPIData)
             .expectStatus(200)
             .toss();
     } catch (error) {
@@ -73,12 +92,8 @@ Then(/^I should be able to get total events$/, async () => {
                 region: "US",
             })
             .expectStatus(200)
-            .inspect((res) => {
-                logger.info("Total no of events " - res.body);
-            })
-            .inspect((req) => {
-                console.log('Request:', req);
-              });
+            .inspect()
+            .toss();
     } catch (error) {
         logger.error(`I should be able to make call to IdentifyURL': ${error.message}`);
         throw error; // Rethrow the error to mark the step as failed

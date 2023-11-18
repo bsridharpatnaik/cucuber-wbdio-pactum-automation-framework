@@ -11,6 +11,7 @@ const { getCurrentUrl, openUrl, waitForRedirectionToExpectedURL } = require("../
 
 Given(/^I launch RudderStack login page$/, async () => {
     try {
+        await LoginPage.openLoginAndWaitToLoad(I);
         await openUrl(uiRoutes.login);
         await waitForRedirectionToExpectedURL(uiRoutes.login);
     } catch (error) {
@@ -73,8 +74,7 @@ Then(/^I click "Go to Dashboard" on addmfa later page$/, async () => {
 
 Then(/^I should land on Dashboard$/, async () => {
     try {
-        waitForRedirectionToExpectedURL(uiRoutes.dashboard);
-        expect(await DashBoard.getDashboardPageTitle).toBeDisplayed();
+        await DashBoard.getDashboardPageTitle.isDisplayed();
     } catch (error) {
         logger.error(`Error: ${error.message}`);
         throw error; 

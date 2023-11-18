@@ -18,6 +18,15 @@ Feature: Verify login functionality for RudderStack API
       | <validEmail> | <validPassword> |
 
   @API
+  Scenario Outline: User should be able to call TrackURL using writeKey
+    Given I make Login API call using <email> and <password> and receive 200 with access token
+    Then I should be able to make call to TrackURL
+
+    Examples: 
+      | email        | password        |
+      | <validEmail> | <validPassword> |
+
+  @API
   Scenario Outline: User should be able to call IdentifyURL using writeKey
     Given I make Login API call using <email> and <password> and receive 200 with access token
     Then I should be able to get total events

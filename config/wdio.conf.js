@@ -1,5 +1,7 @@
 // Load environment variables from .env file
+
 require("dotenv").config({ path: "environments/.env." + process.env.NODE_ENV });
+const RerunService = require ('wdio-rerun-service');
 const BrowserFactory = require("../src/utils/BrowserFactory.js");
 const { generate } = require("multiple-cucumber-html-reporter");
 const { removeSync } = require("fs-extra");
@@ -121,7 +123,14 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    //services: [['selenium-standalone', { autoStartStopServer: false }],],
+    services: [[RerunService, {
+        
+    }]],
+    rerunService: {
+        command: 'npx wdio',
+        rerunMaxInstances: 2,
+        instances: 2,
+      },
     //
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber

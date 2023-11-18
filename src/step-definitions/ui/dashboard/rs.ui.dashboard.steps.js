@@ -51,11 +51,11 @@ When(/^I navigate to Sources page$/, async () => {
     await DashBoardPage.navigateToSourcePage();
 });
 
-When(/^I click on source (.*)$/, async (sourceName) => {
+When(/^I click on source (.*)$/, { wrapperOptions: { retry: 2 } }, async (sourceName) => {
     await DashBoardPage.clickOnSource(sourceName);
 });
 
-When(/^I click on "Add Destination" button and select "use existing destination"$/, async () => {
+When(/^I click on "Add Destination" button and select "use existing destination"$/, { wrapperOptions: { retry: 2 } }, async () => {
     await DashBoardPage.selectUseExistingDistFromAddDestination();
 });
 

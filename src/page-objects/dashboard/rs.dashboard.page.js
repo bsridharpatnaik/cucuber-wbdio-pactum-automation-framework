@@ -92,6 +92,14 @@ class Dashboard {
         await pauseBrowser(2000); //intentional for page to load
         await this.getConnectionLine.isDisplayed();
     }
+
+    async checkConnectionLineNotAvailableOnConnPage() {
+        await this.clickConnectionLink();
+        await this.getPageTitle("Connections");
+        await pauseBrowser(2000); //intentional for page to load
+        await this.getConnectionLine.isDisplayed({ reverse: true });
+    }
+
     async clickContinueOnConfig() {
         await this.getContinueButton.isDisplayed();
         await this.getContinueButton.click();
@@ -134,6 +142,7 @@ class Dashboard {
     }
 
     async disconnectDestination(destinationName) {
+        await pauseBrowser(3000); //Intentional to allow loading of refresh button. 
         await this.get3DotsButtonForDestination(destinationName).click();
         await this.getDisconnectDestOption.click();
         await this.getConfirmDisconnectButton.click();

@@ -16,7 +16,7 @@ Given(/^I launch RudderStack login page$/, async () => {
     } catch (error) {
         logger.error("Error launching Rudderstack login page");
         logger.error(`Error: ${error.message}`);
-        throw error; // Rethrow the exception to fail the step
+        throw error; 
     }
 });
 
@@ -28,7 +28,7 @@ When(/^I enter my (.*) and (.*) and submit$/, async (email, password) => {
 //        await waitForRedirectionToExpectedURL(uiRoutes.addmfa);
     } catch (error) {
         logger.error(`Error: ${error.message}`);
-        throw error; // Rethrow the exception to fail the step
+        throw error; 
     }
 });
 
@@ -38,7 +38,7 @@ When(/^I enter any (.*) as email$/, async (email) => {
     } catch (error) {
         logger.error("Error Logging in to application");
         logger.error(`Error: ${error.message}`);
-        throw error; // Rethrow the exception to fail the step
+        throw error; 
     }
 });
 
@@ -47,7 +47,7 @@ Then(/^I should see wrong email or password message$/, async () => {
         await LoginPage.getWrongCredMessage.isDisplayed();
     } catch (error) {
         logger.error(`Error: ${error.message}`);
-        throw error; // Rethrow the exception to fail the step
+        throw error; 
     }
 });
 
@@ -57,27 +57,27 @@ Then(/^I select later on add mfa page$/, async () => {
         await waitForRedirectionToExpectedURL(uiRoutes.addmfalater);
     } catch (error) {
         logger.error(`Error: ${error.message}`);
-        throw error; // Rethrow the exception to fail the step
+        throw error; 
     }
 });
 
 Then(/^I click "Go to Dashboard" on addmfa later page$/, async () => {
     try {
         await LoginPage.clickGoToDashboard();
-        //TODO - add assertion to check URL route
+        waitForRedirectionToExpectedURL(uiRoutes.dashboard);
     } catch (error) {
         logger.error(`Error: ${error.message}`);
-        throw error; // Rethrow the exception to fail the step
+        throw error; 
     }
 });
 
 Then(/^I should land on Dashboard$/, async () => {
     try {
-        //TODO - add assertion to check URL route
-        //expect((await DashBoard.getDashboardPageTitle)).isDisplayed();
+        waitForRedirectionToExpectedURL(uiRoutes.dashboard);
+        expect(await DashBoard.getDashboardPageTitle).toBeDisplayed();
     } catch (error) {
         logger.error(`Error: ${error.message}`);
-        throw error; // Rethrow the exception to fail the step
+        throw error; 
     }
 });
 
@@ -86,6 +86,6 @@ Then(/^Login button should be disabled$/, async () => {
         await expect(await LoginPage.getLoginButton).toBeDisabled();
     } catch (error) {
         logger.error(`Error: ${error.message}`);
-        throw error; // Rethrow the exception to fail the step
+        throw error; 
     }
 });

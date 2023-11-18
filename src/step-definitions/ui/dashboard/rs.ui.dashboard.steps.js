@@ -13,64 +13,139 @@ const apiEndpoints = require("../../../../config/api-endpoints.js");
 const { pause } = require("webdriverio");
 
 Given(/^Left pane menu is displayed$/, async () => {
-    expect(DashBoardPage.getLeftPaneMenu).isDisplayed();
+    try {
+        expect(await DashBoardPage.getLeftPaneMenu()).isDisplayed();
+    } catch (error) {
+        logger.error(`Error: ${error.message}`);
+        throw error; 
+    }
 });
 
 Then(/^All required links should be displayed$/, async () => {
-    expect(DashBoardPage.getLeftPaneConnectionsLink).isDisplayed();
-    expect(DashBoardPage.getLeftPaneSourcesLink).isDisplayed();
-    expect(DashBoardPage.getLeftPaneDestinationsLink).isDisplayed();
+    try {
+        expect(await DashBoardPage.getLeftPaneConnectionsLink()).isDisplayed();
+        expect(await DashBoardPage.getLeftPaneSourcesLink()).isDisplayed();
+        expect(await DashBoardPage.getLeftPaneDestinationsLink()).isDisplayed();
+    } catch (error) {
+        logger.error(`Error: ${error.message}`);
+        throw error; 
+    }
 });
 
 Then(/^I click on three dots against (.*) and click disconnect$/, async (destinationName) => {
-    await DashBoardPage.disconnectDestination(destinationName);
-    await pauseBrowser(4000);
+    try {
+        await DashBoardPage.disconnectDestination(destinationName);
+        await pauseBrowser(4000);
+    } catch (error) {
+        logger.error(`Error: ${error.message}`);
+        throw error; 
+    }
 });
 
 Then(/^I click on Connections link$/, async () => {
-    await DashBoardPage.clickConnectionLink();
+    try {
+        await DashBoardPage.clickConnectionLink();
+    } catch (error) {
+        logger.error(`Error: ${error.message}`);
+        throw error; 
+    }
 });
 
 Then(/^I verify that (.*) is not displayed under source (.*)$/, async (destinationName, sourceName) => {
-    //TODO -
+    try {
+        await DashBoardPage.checkIfDestAvailableUnderSource(sourceName, destinationName);
+    } catch (error) {
+        logger.error(`Error: ${error.message}`);
+        throw error; 
+    }
 });
 
 Then(/^I verify that connection line does exists on Connections page$/, async () => {
-    //TODO
+    try {
+        await DashBoardPage.checkConnectionLineNotAvailableOnConnPage();
+    } catch (error) {
+        logger.error(`Error: ${error.message}`);
+        throw error; 
+    }
 });
 
 Given(/^Connection does not exist$/, async () => {
-    return true; //TODO - code to delete connection if exists
+    try {
+        return true; //TODO - code to delete connection if exists
+    } catch (error) {
+        logger.error(`Error: ${error.message}`);
+        throw error; 
+    }
 });
 
 Given(/^Connection exists$/, async () => {
-    return true; //TODO - code to create connection if does not exists
+    try {
+        return true; //TODO - code to create connection if does not exist
+    } catch (error) {
+        logger.error(`Error: ${error.message}`);
+        throw error; 
+    }
 });
 
 When(/^I navigate to Sources page$/, async () => {
-    await DashBoardPage.navigateToSourcePage();
+    try {
+        await DashBoardPage.navigateToSourcePage();
+    } catch (error) {
+        logger.error(`Error: ${error.message}`);
+        throw error; 
+    }
 });
 
 When(/^I click on source (.*)$/, { wrapperOptions: { retry: 2 } }, async (sourceName) => {
-    await DashBoardPage.clickOnSource(sourceName);
+    try {
+        await DashBoardPage.clickOnSource(sourceName);
+    } catch (error) {
+        logger.error(`Error: ${error.message}`);
+        throw error; 
+    }
 });
 
 When(/^I click on "Add Destination" button and select "use existing destination"$/, { wrapperOptions: { retry: 2 } }, async () => {
-    await DashBoardPage.selectUseExistingDistFromAddDestination();
+    try {
+        await DashBoardPage.selectUseExistingDistFromAddDestination();
+    } catch (error) {
+        logger.error(`Error: ${error.message}`);
+        throw error; 
+    }
 });
 
 When(/^I select radio button against (.*) and click Continue$/, async (destinationName) => {
-    await DashBoardPage.selectRadioAgainstDestAndContinue(destinationName);
+    try {
+        await DashBoardPage.selectRadioAgainstDestAndContinue(destinationName);
+    } catch (error) {
+        logger.error(`Error: ${error.message}`);
+        throw error; 
+    }
 });
 
 When(/^I Click Continue again on configuration page$/, async () => {
-    await DashBoardPage.clickContinueOnConfig();
+    try {
+        await DashBoardPage.clickContinueOnConfig();
+    } catch (error) {
+        logger.error(`Error: ${error.message}`);
+        throw error; 
+    }
 });
 
 Then(/^I verify that connection line exists on Connections page$/, async () => {
-    await DashBoardPage.checkConnectionLineOnConnPage();
+    try {
+        await DashBoardPage.checkConnectionLineOnConnPage();
+    } catch (error) {
+        logger.error(`Error: ${error.message}`);
+        throw error; 
+    }
 });
 
 Then(/^I verify that (.*) is displayed under source (.*)$/, async (destinationName, sourceName) => {
-    await DashBoardPage.checkIfDestAvailableUnderSource(sourceName, destinationName);
+    try {
+        await DashBoardPage.checkIfDestAvailableUnderSource(sourceName, destinationName);
+    } catch (error) {
+        logger.error(`Error: ${error.message}`);
+        throw error; 
+    }
 });
